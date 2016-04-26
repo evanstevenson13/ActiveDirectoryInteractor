@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ActiveDirectoryInteractorTest {
     [TestClass]
     public class LDAPSearchTest{
+
+        //todo Make more tests
         
         /// <summary>
         /// Checks that the correct ldap uri is generated
