@@ -1,5 +1,7 @@
 ﻿
 
+//http://www.adamjamesnaylor.com/2012/02/27/UnitTestingCodeDependantUponActiveDirectoryClasses.aspx
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +53,8 @@ namespace ActiveDirectoryInteractor{
         /// <param name="computerName">Computer name to search for</param>
         /// <returns>Dictionary of property names and values for the provided computer</returns>
         /// <exception cref="NoComputerNameProvidedException">No computer name was given</exception>
-        public static Dictionary<string, object> GetComputerProperties(string computerName){
+        //public static Dictionary<string, object> GetComputerProperties(string computerName){
+        public static ResultPropertyCollection GetComputerProperties(string computerName){
             //if(!DirectoryEntry.Exists(fullPath)){}
             if(string.IsNullOrEmpty(computerName)){
                 throw new NoComputerNameProvidedException("No computer name was provided");
@@ -62,19 +65,19 @@ namespace ActiveDirectoryInteractor{
 
             deSearch.SearchScope = SearchScope.Subtree;
             deSearch.Filter = "(&(objectClass=computer)(name=" + computerName + "))";
-            //deSearch.PropertiesToLoad.Add("ms-Mcs-AdmPwd");
             deSearch.ClientTimeout = new TimeSpan(0, 0, 5);
-            SearchResult results = deSearch.FindOne();
 
+            SearchResult results = deSearch.FindOne();
             ResultPropertyCollection properties = results.Properties;
 
-            allProperties.Clear();
-            foreach(DictionaryEntry property in results.Properties){
-                allProperties.Add(property.Key.ToString(), property.Value);
-            }
+            //allProperties.Clear();
+            //foreach(DictionaryEntry property in results.Properties){
+            //    allProperties.Add(property.Key.ToString(), property.Value);
+            //}
 
             de.Dispose();
-            return allProperties;
+            //return allProperties;
+            return properties;
         }
 
     }// Class

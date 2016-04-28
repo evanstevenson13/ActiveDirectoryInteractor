@@ -60,6 +60,9 @@
       <Name>ActiveDirectoryInteractor</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Windows6.1-KB975541-x86.msu" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
