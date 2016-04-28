@@ -50,8 +50,13 @@ namespace ActiveDirectoryInteractor{
         /// </summary>
         /// <param name="computerName">Computer name to search for</param>
         /// <returns>Dictionary of property names and values for the provided computer</returns>
+        /// <exception cref="NoComputerNameProvidedException">No computer name was given</exception>
         public static Dictionary<string, object> GetComputerProperties(string computerName){
             //if(!DirectoryEntry.Exists(fullPath)){}
+            if(string.IsNullOrEmpty(computerName)){
+                throw new NoComputerNameProvidedException("No computer name was provided");
+            }
+
             DirectoryEntry de = new DirectoryEntry(fullPath, username, password, AuthenticationTypes.Secure);
             DirectorySearcher deSearch = new DirectorySearcher(de);
 
